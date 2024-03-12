@@ -1,30 +1,39 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:stopwatch/main.dart';
+import 'package:stopwatch/app.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('stopwatch cycle', (WidgetTester tester) async {
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(const App());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pump(const Duration(microseconds: 100));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text("Start"), findsOneWidget);
+
+    await tester.tap(find.text('Start'));
+
+    await tester.pump(const Duration(microseconds: 100));
+
+    expect(find.text("Stop"), findsOneWidget);
+
+    expect(find.text('Lap 0'), findsOneWidget);
+
+    await tester.tap(find.text('Lap 0'));
+
+    await tester.pump(const Duration(microseconds: 100));
+
+    await tester.tap(find.text('Lap 1'));
+
+    await tester.pump(const Duration(microseconds: 100));
+
+    expect(find.text('Lap 2'), findsOneWidget);
+
+    await tester.tap(find.text('Reset'));
+
+    await tester.pump(const Duration(microseconds: 100));
+
+    expect(find.text("Start"), findsOneWidget);
+
+    expect(find.text('Lap 0'), findsOneWidget);
   });
 }
