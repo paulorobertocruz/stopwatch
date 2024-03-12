@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -38,52 +40,59 @@ class _StopWatchPageState extends State<StopWatchPage> {
             right: 0,
             bottom: 0,
             child: Center(
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(150),
-                ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TimeWidget(
-                        rawTime: widget.timer.rawTime,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RecordAddButtonWidget(
-                            addLap: () {
-                              widget.timer.onAddLap();
-                            },
-                            records: widget.timer.records,
-                            isRunning: widget.timer.isRunning,
-                          ),
-                          StartStopButtonWiget(
-                            isRunning: widget.timer.isRunning,
-                            onToggle: () {
-                              setState(() {
-                                if (widget.timer.isRunning) {
-                                  widget.timer.onStopTimer();
-                                } else {
-                                  widget.timer.onStartTimer();
-                                }
-                              });
-                            },
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                widget.timer.onResetTimer();
-                              });
-                            },
-                            child: const Text("Reset"),
-                          ),
-                        ],
-                      ),
-                    ]),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final double width = min(constraints.maxWidth * 0.5, 300);
+                  
+                  return Container(
+                    width: width,
+                    height: width,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(width * 0.5),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TimeWidget(
+                          rawTime: widget.timer.rawTime,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RecordAddButtonWidget(
+                              addLap: () {
+                                widget.timer.onAddLap();
+                              },
+                              records: widget.timer.records,
+                              isRunning: widget.timer.isRunning,
+                            ),
+                            StartStopButtonWiget(
+                              isRunning: widget.timer.isRunning,
+                              onToggle: () {
+                                setState(() {
+                                  if (widget.timer.isRunning) {
+                                    widget.timer.onStopTimer();
+                                  } else {
+                                    widget.timer.onStartTimer();
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.timer.onResetTimer();
+                            });
+                          },
+                          child: const Text("Reset"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               ),
             ),
           ),
