@@ -18,6 +18,7 @@ class TimeWidget extends StatelessWidget {
             StopWatchTimer.getDisplayTime(snapshot.data ?? 0),
             style: const TextStyle(
               fontSize: 24,
+              color: Colors.white,
             ),
           );
         });
