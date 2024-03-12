@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -7,8 +6,10 @@ class RecordAddButtonWidget extends StatelessWidget {
     super.key,
     required this.addLap,
     required this.records,
+    required this.isRunning,
   });
 
+  final bool isRunning;
   final void Function() addLap;
   final Stream<List<StopWatchRecord>> records;
 
@@ -19,7 +20,7 @@ class RecordAddButtonWidget extends StatelessWidget {
       builder: (context, snap) {
         final laps = snap.data ?? [];
         return ElevatedButton(
-          onPressed: addLap,
+          onPressed: isRunning ? addLap : null,
           child: Text("Lap ${laps.length}"),
         );
       },

@@ -48,7 +48,9 @@ class _StopWatchPageState extends State<StopWatchPage> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TimeWidget(rawTime: timer.rawTime),
+                      TimeWidget(
+                        rawTime: timer.rawTime,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -57,6 +59,7 @@ class _StopWatchPageState extends State<StopWatchPage> {
                               timer.onAddLap();
                             },
                             records: timer.records,
+                            isRunning: timer.isRunning,
                           ),
                           StartStopButtonWiget(
                             isRunning: timer.isRunning,
