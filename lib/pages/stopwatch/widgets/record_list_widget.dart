@@ -19,15 +19,19 @@ class RecordListWidget extends StatelessWidget {
         final records = snap.data ?? [];
         return SingleChildScrollView(
           child: Column(
+            verticalDirection: VerticalDirection.up,
+            mainAxisAlignment: MainAxisAlignment.end,
+
             children: [
+              const SizedBox(
+                height: 300,
+              ),
               for (var index = 0; index < records.length; index++)
                 RecordWidget(
                   index: index,
                   time: records[index].rawValue ?? 0,
                 ),
-              const SizedBox(
-                height: 300,
-              ),
+              
             ],
           ),
         );
