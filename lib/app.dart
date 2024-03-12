@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import 'pages/stopwatch/stopwatch_page.dart';
 
@@ -7,13 +8,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final timer = StopWatchTimer();
     return MaterialApp(
       title: 'StopWatch',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      home: StopWatchPage(
+        timer: timer,
       ),
-      home: const StopWatchPage(),
     );
   }
 }

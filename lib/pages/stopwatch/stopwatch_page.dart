@@ -9,15 +9,15 @@ import 'widgets/time_widget.dart';
 class StopWatchPage extends StatefulWidget {
   const StopWatchPage({
     super.key,
+    required this.timer,
   });
 
+  final StopWatchTimer timer;
   @override
   State<StopWatchPage> createState() => _StopWatchPageState();
 }
 
 class _StopWatchPageState extends State<StopWatchPage> {
-  StopWatchTimer timer = StopWatchTimer();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _StopWatchPageState extends State<StopWatchPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: RecordListWidget(
-                  records: timer.records,
+                  records: widget.timer.records,
                 ),
               ),
             ),
@@ -49,26 +49,26 @@ class _StopWatchPageState extends State<StopWatchPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TimeWidget(
-                        rawTime: timer.rawTime,
+                        rawTime: widget.timer.rawTime,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RecordAddButtonWidget(
                             addLap: () {
-                              timer.onAddLap();
+                              widget.timer.onAddLap();
                             },
-                            records: timer.records,
-                            isRunning: timer.isRunning,
+                            records: widget.timer.records,
+                            isRunning: widget.timer.isRunning,
                           ),
                           StartStopButtonWiget(
-                            isRunning: timer.isRunning,
+                            isRunning: widget.timer.isRunning,
                             onToggle: () {
                               setState(() {
-                                if (timer.isRunning) {
-                                  timer.onStopTimer();
+                                if (widget.timer.isRunning) {
+                                  widget.timer.onStopTimer();
                                 } else {
-                                  timer.onStartTimer();
+                                  widget.timer.onStartTimer();
                                 }
                               });
                             },
@@ -76,7 +76,7 @@ class _StopWatchPageState extends State<StopWatchPage> {
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                timer.onResetTimer();
+                                widget.timer.onResetTimer();
                               });
                             },
                             child: const Text("Reset"),
